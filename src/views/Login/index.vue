@@ -44,15 +44,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-import type { FormInstance, FormRules } from "element-plus"
-import { ElMessage } from 'element-plus'
+import {useRouter} from 'vue-router'
+import type {FormInstance, FormRules} from "element-plus"
+import {ElMessage} from 'element-plus'
+import {useAdminStore} from '@/store/ums/admin'
 
 import go from 'await-handler-ts'
-import { onBeforeUnmount, onMounted, reactive, Ref, ref, toRefs, UnwrapNestedRefs } from 'vue';
+import {onBeforeUnmount, onMounted, reactive, ref, toRefs, UnwrapNestedRefs} from 'vue';
 
 const APP_TITLE = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
+const adminStore = useAdminStore()
 
 const loginFormRef = ref<FormInstance>()
 
@@ -104,33 +106,35 @@ const loginRules = reactive<FormRules>({
 const loading = ref<boolean>(false)
 
 const onSubmit = async () => {
-    // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
-    if (loginFormRef.value?.validate()) {
-        let [error] = await go(loginFormRef.value?.validate())
-        console.log('error', error);
-        // 如果校验成功，进行表单提交
-        if (!error) {
-            try {
-                loading.value = true
-                // 触发登录操作
-                // await adminStore.login(loginForm)
-                // 提示登录成功
-                ElMessage({
-                    message: '登录成功',
-                    type: 'success',
-                    center: true,
-                    duration: 1000
-                })
-                loading.value = false
-                // 跳转到首页
-                // await router.push('/')
-            } catch (e) {
-                console.log('login', e)
-            } finally {
-                loading.value = false
-            }
-        }
+  // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
+  if (loginFormRef.value?.validate()) {
+    let [error] = await go(loginFormRef.value?.validate())
+    // 如果校验成功，进行表单提交
+    if (!error) {
+      try {
+        loading.value = true
+        // 触发登录操作
+        await adminStore.login({
+          ...loginForm.value
+        })
+        // 提示登录成功
+        ElMessage({
+          message: '登录成功',
+          type: 'success',
+          center: true,
+          duration: 1000
+        })
+        loading.value = false
+        // 跳转到首页
+        await router.push('/')
+      } catch (e) {
+        console.error('login', e)
+      } finally {
+        loading.value = false
+      }
     }
+  }
+
 }
 
 // 键盘事件
