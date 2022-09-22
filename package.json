@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --force --host",
     "build": "vue-tsc --noEmit && vite build",
+    "test": "vue-tsc --noEmit && vite build --mode test",
+    "github": "vue-tsc --noEmit && vite build --mode github",
     "preview": "vite preview"
   },
   "dependencies": {
