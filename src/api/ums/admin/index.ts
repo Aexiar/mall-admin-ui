@@ -9,12 +9,12 @@ import {
 import request from "@/utils/request";
 
 /* 登录 */
-export const adminLoginAPI: (data: AdminLoginType) => PromiseResult<AminLoginReturnType> = (data) => {
+export const adminLoginApi: (data: AdminLoginType) => PromiseResult<AminLoginReturnType> = (data) => {
     return request.post("/ums/admin/doLogin", data);
 };
 
 /* 修改密码 */
-export const changePasswordAPI: (data: ChangePasswordType) => PromiseResult<null> = (data) => {
+export const changePasswordApi: (data: ChangePasswordType) => PromiseResult<null> = (data) => {
     return request.post('/ums/admin/changePassword', data)
 }
 
@@ -24,7 +24,7 @@ export const profileApi: () => PromiseResult<ProfileReturnType> = () => {
 }
 
 /* 退出登录 */
-export const logoutApi: () => PromiseResult<null> = () => {
+export const adminLogoutApi: () => PromiseResult<null> = () => {
     return request.post('/ums/admin/logout')
 }
 

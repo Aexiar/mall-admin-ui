@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import {FormInstance, FormRules} from "element-plus"
-import {changePasswordAPI} from "@/api/ums/admin"
+import {changePasswordApi} from "@/api/ums/admin"
 import {reactive, ref} from "vue";
 import go from 'await-handler-ts'
 import {ChangePasswordType} from "@/types/ums/admin";
@@ -96,7 +96,7 @@ const submitForm = async () => {
     let [error] = await go(changePasswordFormRef.value?.validate());
     // 如果校验成功，进行表单提交
     if (!error) {
-      return await changePasswordAPI(changePasswordForm)
+      return await changePasswordApi(changePasswordForm)
     }
   }
 }

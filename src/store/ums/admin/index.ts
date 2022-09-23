@@ -1,6 +1,6 @@
 import {_GettersTree, defineStore} from "pinia";
 import {ActionType, AdminLoginType, AminLoginReturnType, ProfileReturnType, StateType,} from "@/types/ums/admin";
-import {adminLoginAPI, profileApi} from "@/api/ums/admin";
+import {adminLoginApi, adminLogoutApi, profileApi} from "@/api/ums/admin";
 
 export const useAdminStore = defineStore<string,
     StateType,
@@ -31,13 +31,14 @@ export const useAdminStore = defineStore<string,
         // 登录
         async loginAction(value: AdminLoginType): Promise<void> {
             // 登录
-            const result: Result<AminLoginReturnType> = await adminLoginAPI(value)
+            const result: Result<AminLoginReturnType> = await adminLoginApi(value)
             // 将接口的返回值设置到 store 中
             Object.assign(this.$state, result.data)
         },
         // 退出登录
-        logoutAction(): void {
-
+        async logoutAction(): Promise<void> {
+            await adminLogoutApi()
+            this.clearAction()
         },
         // 清除用户缓存数据
         clearAction(): void {

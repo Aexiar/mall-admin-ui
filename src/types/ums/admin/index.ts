@@ -25,13 +25,13 @@ export interface ActionType {
     loginAction(value: AdminLoginType): Promise<void>;
 
     // 退出登录
-    logoutAction(): void;
+    logoutAction(): Promise<void>;
 
     // 清空
     clearAction(): void;
 
     // 用户个人信息
-    profileAction(): void;
+    profileAction(): Promise<void>;
 }
 
 // 登录接口的数据类型
