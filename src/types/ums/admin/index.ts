@@ -14,9 +14,9 @@ export type StateType = {
     resourceCodeList: string[];
     roleCodeList: string[];
     menuList: string[];
-    username: string ;
-    avatar: string ;
-    nickName: string ;
+    username: string;
+    avatar: string;
+    nickName: string;
 };
 
 // Store 中的 Action 的类型
@@ -145,7 +145,9 @@ export type AddType = {
 
 // 编辑接口的数据类型
 export type EditType = {
-// 用户名
+    // 主键
+    id: string,
+    // 用户名
     username: string,
     // 密码
     password: string,

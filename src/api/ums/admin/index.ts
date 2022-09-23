@@ -49,6 +49,6 @@ export const adminAddApi: (data: Partial<AddType>) => PromiseResult<null> = data
 }
 
 // 编辑管理员
-export const adminEditApi: (data: Partial<EditType>, id: string) => PromiseResult<null> = (data, id) => {
-    return request.put(`/ums/admin/edit/${id}`, {...data})
+export const adminEditApi: (data: Partial<EditType>) => PromiseResult<null> = (data) => {
+    return request.put(`/ums/admin/edit`, {...data})
 }

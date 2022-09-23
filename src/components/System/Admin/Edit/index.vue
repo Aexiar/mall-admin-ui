@@ -189,7 +189,7 @@ const submitForm = async () => {
   // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
   const validate = await unref(editFormRef)?.validate();
   if (validate) {
-    return await adminEditApi(editForm, props.id)
+    return await adminEditApi(editForm)
   }
 }
 

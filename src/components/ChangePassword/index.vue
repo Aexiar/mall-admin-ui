@@ -35,9 +35,8 @@
 
 <script setup lang="ts">
 import {FormInstance, FormRules} from "element-plus"
-import {adminAddApi, adminEditApi, changePasswordApi} from "@/api/ums/admin"
+import {changePasswordApi} from "@/api/ums/admin"
 import {reactive, ref, unref} from "vue";
-import go from 'await-handler-ts'
 import {ChangePasswordType} from "@/types/ums/admin";
 
 const changePasswordFormRef = ref<FormInstance>()
