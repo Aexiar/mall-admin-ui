@@ -27,7 +27,4 @@ type PaginationReturn<T = any> = {
     records: T[]  // 记录数
 }
 
-// 分页参数：起始页码
-const PAGE_NO: number = 1;
-// 分页参数：每页显示多少条
-const PAGE_SIZE: number = 10;
+

@@ -16,6 +16,7 @@
     "await-handler-ts": "^2.0.2",
     "axios": "^0.27.2",
     "element-plus": "^2.2.17",
+    "fuse.js": "^6.6.2",
     "pinia": "^2.0.22",
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.11.0",

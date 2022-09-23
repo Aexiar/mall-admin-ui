@@ -31,7 +31,6 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 // 添加响应拦截器
 instance.interceptors.response.use(async (response: AxiosResponse) => {
-    console.log(response.data)
     const result: Result = response.data
     if (result.code === ReturnCodeEnum.SUCCESS_CODE) { // 请求成功，并且业务成功，返回解析后的数据
         return result

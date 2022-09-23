@@ -103,7 +103,7 @@ const privateRoutes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   // ...privateRoutes
-  routes: [...publicRoutes],
+  routes: [...publicRoutes,...privateRoutes],
 });
 
 const menuList = [

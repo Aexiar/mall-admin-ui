@@ -114,7 +114,7 @@ const onSubmit = async () => {
       try {
         loading.value = true
         // 触发登录操作
-        await adminStore.login({
+        await adminStore.loginAction({
           ...loginForm.value
         })
         // 提示登录成功
