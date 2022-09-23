@@ -46,7 +46,8 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload" oncontextmenu="return false;" ondragstart="return false;">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" oncontextmenu="return false;" ondragstart="return false;" alt="头像"/>
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" oncontextmenu="return false;" ondragstart="return false;"
+             alt="头像" />
         <div v-else class="avatar-uploader-icon">
           <el-icon :class="['i-ep-plus']"></el-icon>
         </div>
@@ -59,11 +60,11 @@
 </template>
 
 <script setup lang="ts">
-import {adminEditApi, adminViewApi} from "@/api/ums/admin"
+import {adminAddApi, adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditType, ViewReturnType} from "@/types/ums/admin"
 import {ElMessage, FormInstance, FormRules, UploadProps} from "element-plus"
 import go from 'await-handler-ts'
-import {reactive, ref, watchEffect} from "vue";
+import {reactive, ref, unref, watchEffect} from "vue";
 import {ReturnCodeEnum} from "@/types/enums";
 import {UnwrapNestedRefs} from "@vue/reactivity";
 import {EMAIL_REGEXP, PHONE_REGEXP} from "@/types/global";
@@ -72,16 +73,17 @@ const baseUrl = import.meta.env.VITE_APP_BASE_URL + '/oss/upload'
 
 const editFormRef = ref<FormInstance>()
 
-let editForm: UnwrapNestedRefs<Partial<ViewReturnType | EditType>> = reactive<Partial<ViewReturnType | EditType>>({
+const editForm: UnwrapNestedRefs<ViewReturnType | EditType> = reactive<ViewReturnType | EditType>({
   username: '',
   realName: '',
   nickName: '',
   gender: '',
   phone: '',
   email: '',
-  status: 0,
+  status: 1,
   avatar: '',
-  sort: 0
+  sort: 0,
+  id: '',
 })
 
 // 验证规则
@@ -185,14 +187,10 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 // 提交
 const submitForm = async () => {
   // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
-  if (editFormRef.value?.validate()) {
-    let [error] = await go(editFormRef.value?.validate())
-    // 如果校验成功，进行表单提交
-    if (!error) {
-      return await adminEditApi(Object.assign(editForm), props.id);
-    }
+  const validate = await unref(editFormRef)?.validate();
+  if (validate) {
+    return await adminEditApi(editForm, props.id)
   }
-
 }
 
 // 重置

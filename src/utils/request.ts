@@ -37,8 +37,8 @@ instance.interceptors.response.use(async (response: AxiosResponse) => {
     } else { // 请求成功，业务失败，给出对应的提示
         if (result.code === ReturnCodeEnum.UNAUTHORIZED_CODE) { // 如果 token 过期，token 过时，token 无效等原因，就退出登录
             // 调用清空缓存操作
-            const {clear} = useAdminStore()
-            await clear();
+            const {clearAction} = useAdminStore()
+            await clearAction();
             await router.push('/login')
             // 如果 401 不需要继续将下抛出异常，直接中断即可
             return new Promise(() => {

@@ -38,7 +38,8 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload" oncontextmenu="return false;" ondragstart="return false;">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" oncontextmenu="return false;" ondragstart="return false;" alt="头像"/>
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" oncontextmenu="return false;" ondragstart="return false;"
+             alt="头像" />
         <div v-else class="avatar-uploader-icon">
           <el-icon :class="['i-ep-plus']"></el-icon>
         </div>
@@ -62,12 +63,11 @@
 </template>
 
 <script lang="ts" setup>
-// 上传
-import type {FormInstance, FormRules, UploadProps} from 'element-plus'
-import {adminAddApi} from "@/api/ums/admin";
+import {ElForm, FormInstance, FormRules, UploadProps} from 'element-plus'
+import {adminAddApi, adminEditApi} from "@/api/ums/admin";
 import go from 'await-handler-ts'
 import {ElMessage} from "element-plus"
-import {reactive, ref} from "vue";
+import {reactive, ref, unref} from "vue";
 import {ReturnCodeEnum} from "@/types/enums";
 import {AddType} from "@/types/ums/admin";
 import {EMAIL_REGEXP, PHONE_REGEXP} from "@/types/global";
@@ -179,15 +179,10 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 // 提交
 const submitForm = async () => {
   // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
-  if(addFormRef.value?.validate()){
-    let [error] = await go(addFormRef.value?.validate())
-    // 如果校验成功，进行表单提交
-    if (!error) {
-      return await adminAddApi(addForm)
-    }
+  const validate = await unref(addFormRef)?.validate();
+  if (validate) {
+    return await adminAddApi(addForm)
   }
-
-
 }
 
 // 重置

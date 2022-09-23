@@ -35,8 +35,8 @@
 
 <script setup lang="ts">
 import {FormInstance, FormRules} from "element-plus"
-import {changePasswordApi} from "@/api/ums/admin"
-import {reactive, ref} from "vue";
+import {adminEditApi, changePasswordApi} from "@/api/ums/admin"
+import {reactive, ref, unref} from "vue";
 import go from 'await-handler-ts'
 import {ChangePasswordType} from "@/types/ums/admin";
 
@@ -91,13 +91,12 @@ const changePasswordRules: FormRules = reactive<FormRules>({
 
 // 提交
 const submitForm = async () => {
-  // 进行表单验证
-  if (changePasswordFormRef.value?.validate()) {
-    let [error] = await go(changePasswordFormRef.value?.validate());
-    // 如果校验成功，进行表单提交
-    if (!error) {
-      return await changePasswordApi(changePasswordForm)
-    }
+
+  const validate = unref(changePasswordFormRef)?.validate();
+  if (!validate) {
+    return await changePasswordApi(changePasswordForm)
+  } else {
+    return validate
   }
 }
 

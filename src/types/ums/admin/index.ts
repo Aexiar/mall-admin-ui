@@ -154,7 +154,7 @@ export type EditType = {
     // 昵称
     nickName: string,
     // 性别
-    gender: number,
+    gender: string,
     // 手机号码
     phone: string,
     // 邮箱
