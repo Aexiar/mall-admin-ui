@@ -47,6 +47,8 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FullScreen: typeof import('./components/FullScreen/index.vue')['default']
@@ -58,6 +60,8 @@ declare module '@vue/runtime-core' {
     Sidebar: typeof import('./components/Sidebar/index.vue')['default']
     SidebarHeader: typeof import('./components/SidebarHeader/index.vue')['default']
     SidebarItem: typeof import('./components/SidebarItem/index.vue')['default']
+    TabsView: typeof import('./components/TabsView/index.vue')['default']
+    TagsView: typeof import('./components/TagsView/index.vue')['default']
     View: typeof import('./components/System/Admin/View/index.vue')['default']
   }
 }

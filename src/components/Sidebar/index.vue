@@ -30,44 +30,8 @@ const sidebarStore = useSidebarStore()
 import {menuList} from '@/utils/menu'
 
 // 测试数据
-// const menuList = reactive([
-//   {
-//     id: '2',
-//     title: '系统设置',
-//     icon: 'i-ep-menu',
-//     path: '',
-//     children: [
-//       {
-//         id: '3',
-//         title: '用户管理',
-//         icon: 'i-ep-user',
-//         path: '/system/user',
-//       },
-//       {
-//         id: '6',
-//         title: '角色管理',
-//         icon: 'i-ep-user',
-//         path: '/system/role'
-//       },
-//       {
-//         id: '7',
-//         title: '菜单管理',
-//         icon: 'i-ep-user',
-//         path: '/system/menu'
-//       },
-//       {
-//         id: '81',
-//         title: '部门管理',
-//         icon: 'i-ep-user',
-//         path: '/system/dept'
-//       },
-//     ]
-//   }
-// ])
-// 测试数据
 const activeMenu = computed(() => {
   let {path} = useRoute()
-  const { currentRoute } = useRouter()
   if (path === '/') {
     path = '/home'
   }

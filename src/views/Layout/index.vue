@@ -6,16 +6,14 @@
     </el-aside>
     <el-container>
       <!-- 顶部导航栏 -->
-      <el-header class="header">
+      <el-header>
         <Navbar />
       </el-header>
-      <!--&lt;!&ndash; tagView &ndash;&gt;-->
-      <!--<el-header class="tags-view">-->
-      <!--  <TagsView />-->
-      <!--</el-header>-->
+      <!-- 标签页 -->
+      <TabsView class="tabs-view" />
       <!-- 内容区 -->
       <el-main class="main">
-        <AppMain/>
+        <AppMain />
       </el-main>
     </el-container>
   </el-container>
@@ -25,6 +23,7 @@
 import SideBar from '@/components/Sidebar/index.vue'
 import Navbar from '@/components/Navbar/index.vue'
 import AppMain from '@/components/AppMain/index.vue'
+import TabsView from '@/components/TabsView/index.vue'
 
 </script>
 
@@ -42,11 +41,8 @@ import AppMain from '@/components/AppMain/index.vue'
     border-bottom: 1px solid #eee;
   }
 
-  .tags-view{
-    height: 30px;
-    padding: 0;
-    border-bottom: 1px solid #ccc;
-    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .2);
+  .tabs-view {
+    height: 40px;
   }
 
   .main {
