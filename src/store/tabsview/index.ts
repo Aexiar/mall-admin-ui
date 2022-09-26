@@ -1,7 +1,7 @@
 import {_GettersTree, defineStore} from "pinia";
 import {StateType, ActionType} from '@/types/tabsview'
 
-export const useSidebarStore = defineStore<string, StateType, _GettersTree<StateType>, ActionType>('tabs-view', {
+export const useTabsViewStore = defineStore<string, StateType, _GettersTree<StateType>, ActionType>('tabs-view', {
         state: () => {
             return {
                 tabs: []
