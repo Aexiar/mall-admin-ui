@@ -21,7 +21,7 @@ export const useTabsViewStore = defineStore<string, StateType, _GettersTree<Stat
             strategies: [
                 {
                     storage: localStorage,
-                    paths: ['sidebarOpened']
+                    paths: ['tabs']
                 }
             ],
         },
