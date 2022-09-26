@@ -93,8 +93,6 @@ const removeTab = (path: string) => {
   background-color: #0960bd;
   margin: 0 5px !important;
   color: #fff;
-  font-size: 14px;
-  text-align: center;
 }
 
 ::v-deep(.is-icon-close) {
