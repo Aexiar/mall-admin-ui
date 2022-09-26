@@ -27,4 +27,20 @@ type PaginationReturn<T = any> = {
     records: T[]  // 记录数
 }
 
-
+// 菜单接口的返回值类型
+type MenuType = {
+    // 主键
+    id: string,
+    // 菜单的名称
+    title: string,
+    // 菜单的图标
+    icon: string,
+    // 路由地址，如果是外链，需要以 https 开头
+    path: string,
+    // 名称
+    name: string,
+    // 组件地址
+    component: string,
+    // 子菜单
+    children?: MenuType[]
+}
