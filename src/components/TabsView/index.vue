@@ -5,7 +5,7 @@
         type="card"
         class="tabs"
         @tab-remove="removeTab"
-        @tab-change="tabChange"
+        @tab-change="changeTab"
     >
       <el-tab-pane
           :closable="item.path != '/' && item.path != '/home'"
@@ -24,19 +24,24 @@ import {
   useRoute,
   RouteLocationMatched
 } from "vue-router";
-import {TagsType} from "@/types/tabsview";
+import {TabsType} from "@/types/tabsview";
 
 const route = useRoute()
 
 const activeTab = ref(route.path)
-const tabList: Ref<TagsType[]> = ref<TagsType[]>([])
+const tabList: Ref<TabsType[]> = ref<TabsType[]>([])
 
 // 添加 tag
-const addTag = (data: TagsType) => {
+const addTab = (data: TabsType) => {
   const tag = tabList.value.find(item => item.path == data.path);
   if (!tag) {
     tabList.value.push(data)
   }
+}
+
+// tab 改变
+const changeTab = (t:any) => {
+  console.log(t)
 }
 
 // 监视 route 中的 matched 的变化
@@ -44,7 +49,7 @@ watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
   const result: RouteLocationMatched[] = newValue.filter(item => item.path !== '' && item.meta.title)
   if (result) {
     result.forEach(item => {
-      addTag({
+      addTab({
         title: item.meta.title,
         path: item.path
       })
