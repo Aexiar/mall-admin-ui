@@ -24,17 +24,17 @@ import {
   useRoute,
   RouteLocationMatched, useRouter
 } from "vue-router";
-import {TabsType} from "@/types/tabsview";
+import {TabType} from "@/types/tabsview";
 import {TabsPaneContext} from "element-plus";
 
 const route = useRoute()
 const router = useRouter()
 
 const activeTab = ref(route.path)
-const tabList: Ref<TabsType[]> = ref<TabsType[]>([])
+const tabList: Ref<TabType[]> = ref<TabType[]>([])
 
 // 添加 tag
-const addTab = (data: TabsType) => {
+const addTab = (data: TabType) => {
   const tag = tabList.value.find(item => item.path == data.path);
   if (!tag) {
     tabList.value.push(data)
