@@ -95,7 +95,7 @@
               <el-button type="success" link icon="i-ep-position" @click="handleAllocRole(scope.$index, scope.row)">
               </el-button>
             </el-tooltip>
-            <el-popconfirm :title="`确定删除${scope.row.username}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+            <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
                            width="160">
               <template #reference>
                 <el-button type="danger" icon="i-ep-delete" link>
