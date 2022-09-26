@@ -6,6 +6,7 @@
         class="tabs"
         @tab-remove="removeTab"
         @tab-change="changeTab"
+        @tab-click="clickTab"
     >
       <el-tab-pane
           :closable="item.path != '/' && item.path != '/home'"
@@ -22,11 +23,13 @@
 import {Ref, ref, watch} from 'vue'
 import {
   useRoute,
-  RouteLocationMatched
+  RouteLocationMatched, useRouter
 } from "vue-router";
 import {TabsType} from "@/types/tabsview";
+import {TabsPaneContext} from "element-plus";
 
 const route = useRoute()
+const router = useRouter()
 
 const activeTab = ref(route.path)
 const tabList: Ref<TabsType[]> = ref<TabsType[]>([])
@@ -40,8 +43,17 @@ const addTab = (data: TabsType) => {
 }
 
 // tab 改变
-const changeTab = (t:any) => {
-  console.log(t)
+const changeTab = (path: string) => {
+  activeTab.value = path
+}
+
+// 点击 tab
+const clickTab = (pane: TabsPaneContext, ev: Event) => {
+  const result = pane.paneName
+  if (result) {
+    router.push(result as string)
+  }
+
 }
 
 // 监视 route 中的 matched 的变化
