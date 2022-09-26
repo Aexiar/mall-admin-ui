@@ -10,7 +10,7 @@
       <el-input v-model="addForm.roleName" clearable placeholder="请输入角色名称" />
     </el-form-item>
     <el-form-item label="角色编码" prop="roleCode">
-      <el-input v-model="addForm.roleCode" show-password clearable placeholder="请输入角色编码" />
+      <el-input v-model="addForm.roleCode" clearable placeholder="请输入角色编码" />
     </el-form-item>
     <el-form-item label="状态" prop="status">
       <el-tooltip :content="addForm.status ? '启用' : '禁用'" placement="top">

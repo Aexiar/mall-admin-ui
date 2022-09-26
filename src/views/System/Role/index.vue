@@ -40,14 +40,14 @@
         <el-table-column label="角色名称">
           <template #default="scope">
             <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.username }}</span>
+              <span style="margin-left: 10px">{{ scope.row.roleName }}</span>
             </div>
           </template>
         </el-table-column>
         <el-table-column label="角色编码">
           <template #default="scope">
             <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.realName }}</span>
+              <span style="margin-left: 10px">{{ scope.row.roleCode }}</span>
             </div>
           </template>
         </el-table-column>
