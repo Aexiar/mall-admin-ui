@@ -187,8 +187,8 @@ const handleCurrentChange: (val: number) => void = async (val) => {
 const handleEdit = (index: number, row: AdminPageReturnType) => {
   dialogService({
     title: '角色编辑',
-    height: '60vh',
-    width: '50vw',
+    height: '50vh',
+    width: '40vw',
     content: <RoleEdit id={row.id} />,
     buttons: [
       {
