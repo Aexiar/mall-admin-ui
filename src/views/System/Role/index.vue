@@ -74,6 +74,13 @@
             </div>
           </template>
         </el-table-column>
+        <el-table-column label="更新时间">
+          <template #default="scope">
+            <div style="display: flex; align-items: center">
+              <span style="margin-left: 10px">{{ scope.row.updated }}</span>
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" :fixed="'right'" width="150">
           <template #default="scope">
             <el-tooltip class="box-item" effect="dark" content="详情" placement="top">
@@ -111,7 +118,7 @@
 import {AdminPageReturnType} from "@/types/ums/admin"
 import {adminDeleteApi} from "@/api/ums/admin"
 import dialogService from '@caroundsky/el-plus-dialog-service'
-import AdminView from '@/components/System/Admin/View/index.vue'
+import RoleView from '@/components/System/Role/View/index.vue'
 import RoleAdd from '@/components/System/Role/Add/index.vue'
 import AdminEdit from '@/components/System/Admin/Edit/index.vue'
 import {ElMessage} from "element-plus"
@@ -207,10 +214,10 @@ const handleEdit = (index: number, row: AdminPageReturnType) => {
 // 详情
 const handleView = (index: number, row: AdminPageReturnType) => {
   dialogService({
-    title: '用户详情',
-    height: '60vh',
-    width: '50vw',
-    content: <AdminView id={row.id} />,
+    title: '角色详情',
+    height: '50vh',
+    width: '40vw',
+    content: <RoleView id={row.id} />,
     buttons: [
       {
         label: '确定 ',

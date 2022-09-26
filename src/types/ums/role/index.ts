@@ -41,3 +41,21 @@ export type AddType = {
     // 排序字段
     sort: number
 }
+
+// 查询接口的返回值类型
+export type ViewReturnType = {
+    // 主键
+    id: string,
+    // 角色名称
+    roleName: string,
+    // 角色编码
+    roleCode: string,
+    // 状态
+    status: number,
+    // 排序
+    sort: number,
+    // 创建时间
+    created: string,
+    // 更新时间
+    updated: string
+}
