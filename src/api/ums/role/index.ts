@@ -17,3 +17,8 @@ export const roleAddApi: (data: Partial<AddType>) => PromiseResult<null> = data 
 export const roleViewApi: (id: string) => PromiseResult<ViewReturnType> = id => {
     return request.get(`/ums/role/view/${id}`)
 }
+
+/* 删除角色 */
+export const roleDeleteApi: (id: string) => PromiseResult<null> = (id: string) => {
+    return request.delete(`/ums/role/delete/${id}`)
+}

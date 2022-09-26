@@ -116,7 +116,7 @@
 
 <script setup lang="tsx">
 import {AdminPageReturnType} from "@/types/ums/admin"
-import {adminDeleteApi} from "@/api/ums/admin"
+import {roleDeleteApi} from "@/api/ums/role"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import RoleView from '@/components/System/Role/View/index.vue'
 import RoleAdd from '@/components/System/Role/Add/index.vue'
@@ -233,7 +233,7 @@ const handleView = (index: number, row: AdminPageReturnType) => {
 // 删除
 const handleDelete = async (index: number, row: AdminPageReturnType) => {
   try {
-    const result: Result = await adminDeleteApi(row.id)
+    const result: Result = await roleDeleteApi(row.id)
     ElMessage({
       message: result.msg,
       type: 'success',
