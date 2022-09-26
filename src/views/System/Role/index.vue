@@ -120,7 +120,7 @@ import {roleDeleteApi} from "@/api/ums/role"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import RoleView from '@/components/System/Role/View/index.vue'
 import RoleAdd from '@/components/System/Role/Add/index.vue'
-import AdminEdit from '@/components/System/Admin/Edit/index.vue'
+import RoleEdit from '@/components/System/Role/Edit/index.vue'
 import {ElMessage} from "element-plus"
 import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
@@ -186,10 +186,10 @@ const handleCurrentChange: (val: number) => void = async (val) => {
 // 编辑
 const handleEdit = (index: number, row: AdminPageReturnType) => {
   dialogService({
-    title: '用户编辑',
+    title: '角色编辑',
     height: '60vh',
     width: '50vw',
-    content: <AdminEdit id={row.id} />,
+    content: <RoleEdit id={row.id} />,
     buttons: [
       {
         label: '确定 ',

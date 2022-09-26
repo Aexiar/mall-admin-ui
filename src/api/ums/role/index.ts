@@ -2,6 +2,7 @@ import request from "@/utils/request";
 import {RolePageReturnType, RolePageType} from "@/types/ums/role";
 import {AddType} from "@/types/ums/role";
 import {ViewReturnType} from "@/types/ums/role";
+import {EditType} from "@/types/ums/admin";
 
 /* 分页获取角色数据 */
 export const rolePageListApi: (data: Partial<RolePageType>) => PromiseResult<PaginationReturn<RolePageReturnType>> = data => {
@@ -22,3 +23,10 @@ export const roleViewApi: (id: string) => PromiseResult<ViewReturnType> = id => 
 export const roleDeleteApi: (id: string) => PromiseResult<null> = (id: string) => {
     return request.delete(`/ums/role/delete/${id}`)
 }
+
+/* 编辑角色 */
+export const roleEditApi: (data: Partial<EditType>) => PromiseResult<null> = (data) => {
+    return request.put(`/ums/role/edit`, {...data})
+}
+
+

@@ -59,3 +59,17 @@ export type ViewReturnType = {
     // 更新时间
     updated: string
 }
+
+// 编辑接口的数据类型
+export type EditType = {
+    // 主键
+    id: string,
+    // 角色名称
+    roleName: string,
+    // 角色编码
+    roleCode: string,
+    // 状态
+    status: number,
+    // 排序
+    sort: number,
+}
