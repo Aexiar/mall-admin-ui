@@ -24,7 +24,7 @@ import {
   useRoute,
   RouteLocationMatched
 } from "vue-router";
-import {TagsType} from "@/types/tagsview";
+import {TagsType} from "@/types/tabsview";
 
 const route = useRoute()
 
