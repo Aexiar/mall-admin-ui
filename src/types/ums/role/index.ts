@@ -29,3 +29,15 @@ export type RolePageReturnType = {
     // 更新时间
     updated: string
 }
+
+// 新增接口的数据类型
+export type AddType = {
+    // 角色名称
+    roleName: string,
+    // 角色编码
+    roleCode: string,
+    // 状态
+    status: number,
+    // 排序字段
+    sort: number
+}
