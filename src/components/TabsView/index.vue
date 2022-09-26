@@ -8,6 +8,7 @@
         @tab-change="changeTab"
         @tab-click="clickTab"
     >
+      <!-- class is-active -->
       <el-tab-pane
           :closable="item.path != '/' && item.path != '/home'"
           v-for="item in tabList"
