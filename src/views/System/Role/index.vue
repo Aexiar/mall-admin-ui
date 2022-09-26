@@ -91,8 +91,8 @@
               <el-button link icon="i-ep-edit" @click="handleEdit(scope.$index, scope.row)">
               </el-button>
             </el-tooltip>
-            <el-tooltip class="box-item" effect="dark" content="分配角色" placement="top">
-              <el-button type="success" link icon="i-ep-position" @click="handleAllocRole(scope.$index, scope.row)">
+            <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
+              <el-button type="success" link icon="i-ep-position" @click="handleAllocResource(scope.$index, scope.row)">
               </el-button>
             </el-tooltip>
             <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
@@ -280,8 +280,8 @@ const handleAdd = () => {
   })
 }
 
-// 分配角色
-const handleAllocRole = (index: number, row: AdminPageReturnType) => {
+// 分配资源（菜单等）
+const handleAllocResource = (index: number, row: AdminPageReturnType) => {
   console.log(index)
   console.log(row)
 }
