@@ -17,7 +17,6 @@
       </el-tab-pane>
     </el-tabs>
   </div>
-
 </template>
 <script lang="ts" setup>
 import {Ref, ref, watch} from 'vue'
