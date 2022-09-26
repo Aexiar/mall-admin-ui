@@ -1,13 +1,18 @@
 <template>
-    <div>
-
-    </div>
+  <el-result
+      icon="warning"
+      title="404提示"
+      sub-title="你找的页面走失了~~">
+    <template #extra>
+      <el-button type="primary" @click="$router.push('/home')">回到首页</el-button>
+    </template>
+  </el-result>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 
 </script>
 
-<style lang="scss">
+<style>
 
 </style>

@@ -38,7 +38,7 @@ type MenuType = {
     // 路由地址，如果是外链，需要以 https 开头
     path: string,
     // 名称
-    name: string,
+    name?: string,
     // 组件地址
     component: string,
     // 子菜单

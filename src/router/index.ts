@@ -29,7 +29,7 @@ const publicRoutes: RouteRecordRaw[] = [
         redirect: {name: 'home'},
         children: [
             {
-                path: "",
+                path: "home",
                 name: "home",
                 meta: {
                     title: "首页",
@@ -102,9 +102,15 @@ const privateRoutes: RouteRecordRaw[] = [
     },
 ];
 
+const asyncRoutes: RouteRecordRaw[] = addRoutes(menuList);
+
 // 创建路由
-export default createRouter({
+const router = createRouter({
     history: createWebHashHistory(),
-    // ...privateRoutes
-    routes: [...publicRoutes],
+    // ...privateRoutes publicRoutes
+    routes: [...publicRoutes, ...asyncRoutes],
 });
+
+console.log(router.getRoutes())
+
+export default router

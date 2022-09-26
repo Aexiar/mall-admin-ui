@@ -1,5 +1,4 @@
 import {RouteRecordRaw} from "vue-router";
-import router from '@/router'
 
 export const menuList: MenuType[] = [
     {
@@ -114,7 +113,7 @@ export const addRoutes = (menuList: MenuType[]) => {
                     title: menu.title,
                     icon: menu.icon
                 },
-                component: () => import("../views/" + menu.component + "/index.vue"),
+                component: () => import(/* @vite-ignore */"../views/" + menu.component + "/index.vue"),
                 children
             }
             result.push(data);
@@ -127,7 +126,7 @@ export const addRoutes = (menuList: MenuType[]) => {
                     title: menu.title,
                     icon: menu.icon
                 },
-                component: () => import("../views/" + menu.component + "/index.vue")
+                component: () => import(/* @vite-ignore */"../views/" + menu.component + "/index.vue")
             }
             result.push(data);
         }
@@ -136,8 +135,5 @@ export const addRoutes = (menuList: MenuType[]) => {
 }
 
 // 添加路由
-addRoutes(menuList).forEach(route => router.addRoute(route))
-
-console.log(router.getRoutes())
-// 暴露路由
+// addRoutes(menuList).forEach(route => router.addRoute(route))
 

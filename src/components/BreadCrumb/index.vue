@@ -34,6 +34,8 @@ const getBreadCrumbDataArr = (newValue: RouteLocationMatched[]) => {
     }
   })
 }
+
+console.log('BreadCrumbDataArr',BreadCrumbDataArr)
 // 监视 route 中的 matched 的变化
 watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
   getBreadCrumbDataArr(newValue)

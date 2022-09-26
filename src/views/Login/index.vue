@@ -126,7 +126,7 @@ const onSubmit = async () => {
         })
         loading.value = false
         // 跳转到首页
-        await router.push('/')
+        await router.push('/home')
       } catch (e) {
         console.error('login', e)
       } finally {
