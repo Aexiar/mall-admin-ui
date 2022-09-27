@@ -47,13 +47,6 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="真实姓名">
-            <template #default="scope">
-              <div style="display: flex; align-items: center">
-                <span style="margin-left: 10px">{{ scope.row.realName }}</span>
-              </div>
-            </template>
-          </el-table-column>
           <el-table-column label="昵称">
             <template #default="scope">
               <div style="display: flex; align-items: center">
@@ -88,6 +81,14 @@
             <template #default="scope">
               <div style="display: flex; align-items: center">
                 <span style="margin-left: 10px">{{ scope.row.sort }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="所属角色">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <el-tag class="mx-1" type="info" size="small">Tag 3</el-tag>
+                <el-tag class="mx-1" type="info" size="small">Tag 3</el-tag>
               </div>
             </template>
           </el-table-column>
