@@ -102,7 +102,8 @@ export type AdminPageReturnType = {
     status: number,
     avatar: string,
     sort: number,
-    created: string
+    created: string,
+    isAdmin: boolean | null
 }
 
 // 查询接口的返回值类型

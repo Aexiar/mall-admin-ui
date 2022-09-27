@@ -40,12 +40,11 @@ export const useAdminStore = defineStore<string,
         // 退出登录
         async logoutAction(): Promise<void> {
             await adminLogoutApi()
-            // 清空登录相关缓存
-            this.$reset()
             // 清空 tabs
             const tabsViewStore = useTabsViewStore()
             tabsViewStore.$reset()
-
+            // 清空登录相关缓存
+            this.$reset()
         },
         // 清除用户缓存数据
         clearAction(): void {

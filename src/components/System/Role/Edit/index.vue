@@ -6,10 +6,10 @@
       status-icon
       label-width="100px"
       class="m-5">
-    <el-form-item label="角色名称" prop="username">
+    <el-form-item label="角色名称" prop="roleName">
       <el-input v-model="editForm.roleName" />
     </el-form-item>
-    <el-form-item label="角色编码" prop="realName">
+    <el-form-item label="角色编码" prop="roleCode">
       <el-input v-model="editForm.roleCode" />
     </el-form-item>
     <el-form-item label="状态" prop="status">

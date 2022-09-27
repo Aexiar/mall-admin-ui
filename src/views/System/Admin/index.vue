@@ -79,7 +79,7 @@
             <template #default="scope">
               <el-tooltip :content="scope.row.status ? '启用' : '停用'" placement="top">
                 <el-switch v-model="scope.row.status" class="ml-2" inline-prompt :active-value="1" :inactive-value="0"
-                           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+                           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" :disabled="scope.row.isAdmin">
                 </el-switch>
               </el-tooltip>
             </template>
