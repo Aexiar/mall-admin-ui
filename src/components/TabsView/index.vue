@@ -26,9 +26,8 @@ import {
   useRoute,
   RouteLocationMatched, useRouter
 } from "vue-router";
-import {TabType} from "@/types/tabsview";
 import {useTabsViewStore} from '@/store/tabsview/index'
-import {TabsPaneContext} from "element-plus";
+import {TabPanelName, TabsPaneContext} from "element-plus";
 import {storeToRefs} from "pinia";
 
 const route = useRoute()
@@ -41,8 +40,8 @@ const activeTab = ref(route.path)
 const {tabs} = storeToRefs(tabsViewStore);
 
 // tab 改变
-const changeTab = (path: string) => {
-  activeTab.value = path
+const changeTab = (pane: TabPanelName) => {
+  activeTab.value = pane as string
 }
 
 // 点击 tab
@@ -67,8 +66,8 @@ watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
 }, {immediate: true})
 
 // 删除 tab
-const removeTab = (path: string) => {
-  tabsViewStore.removeTab(path)
+const removeTab = (pane: TabPanelName) => {
+  tabsViewStore.removeTab(pane as string)
 }
 </script>
 <style scoped lang="scss">
