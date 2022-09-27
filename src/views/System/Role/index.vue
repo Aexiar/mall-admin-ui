@@ -1,117 +1,119 @@
 <template>
-  <el-row>
-    <!-- 搜索 -->
-    <el-card shadow="hover" style="width: 100%">
-      <el-form :model="searchOptions" :inline="true">
-        <el-form-item label="角色名称">
-          <el-input v-model="searchOptions.roleName" />
-        </el-form-item>
-        <el-form-item label="角色编码">
-          <el-input v-model="searchOptions.roleCode" />
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="searchOptions.status">
-            <el-option label="全部" :value="-1" />
-            <el-option label="停用" :value="0" />
-            <el-option label="启用" :value="1" />
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleSearch" icon="i-ep-search">
-            搜索
-          </el-button>
-          <el-button @click="handleReset" icon="i-ep-refresh-left" color="#f2f3f7">
-            重置
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </el-row>
-  <el-row>
-    <el-card shadow="hover" style="width:100%">
-      <!-- 新增、导入、导出 -->
-      <el-row>
-        <el-button @click="handleAdd" icon="i-ep-circle-plus-filled" type="primary">添加</el-button>
-      </el-row>
-      <!-- 表格 -->
-      <el-table :data="tableData" style="width: 100%" stripe border table-layout="auto" :highlight-current-row="true"
-                :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
-        <el-table-column type="index" label="#" />
-        <el-table-column label="角色名称">
-          <template #default="scope">
-            <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.roleName }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="角色编码">
-          <template #default="scope">
-            <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.roleCode }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="状态">
-          <template #default="scope">
-            <el-tooltip :content="scope.row.status ? '启用' : '停用'" placement="top">
-              <el-switch v-model="scope.row.status" class="ml-2" inline-prompt :active-value="1" :inactive-value="0"
-                         style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
-              </el-switch>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-        <el-table-column label="排序">
-          <template #default="scope">
-            <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.sort }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="创建时间">
-          <template #default="scope">
-            <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.created }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="更新时间">
-          <template #default="scope">
-            <div style="display: flex; align-items: center">
-              <span style="margin-left: 10px">{{ scope.row.updated }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" :fixed="'right'" width="150">
-          <template #default="scope">
-            <el-tooltip class="box-item" effect="dark" content="详情" placement="top">
-              <el-button link icon="i-ep-info-filled" @click="handleView(scope.$index, scope.row)">
-              </el-button>
-            </el-tooltip>
-            <el-tooltip class="box-item" effect="dark" content="编辑" placement="top">
-              <el-button link icon="i-ep-edit" @click="handleEdit(scope.$index, scope.row)">
-              </el-button>
-            </el-tooltip>
-            <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
-              <el-button type="success" link icon="i-ep-position" @click="handleAllocResource(scope.$index, scope.row)">
-              </el-button>
-            </el-tooltip>
-            <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
-                           width="160">
-              <template #reference>
-                <el-button type="danger" icon="i-ep-delete" link>
+  <div>
+    <el-row>
+      <!-- 搜索 -->
+      <el-card shadow="hover" style="width: 100%">
+        <el-form :model="searchOptions" :inline="true">
+          <el-form-item label="角色名称">
+            <el-input v-model="searchOptions.roleName" />
+          </el-form-item>
+          <el-form-item label="角色编码">
+            <el-input v-model="searchOptions.roleCode" />
+          </el-form-item>
+          <el-form-item label="状态">
+            <el-select v-model="searchOptions.status">
+              <el-option label="全部" :value="-1" />
+              <el-option label="停用" :value="0" />
+              <el-option label="启用" :value="1" />
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleSearch" icon="i-ep-search">
+              搜索
+            </el-button>
+            <el-button @click="handleReset" icon="i-ep-refresh-left" color="#f2f3f7">
+              重置
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-row>
+    <el-row>
+      <el-card shadow="hover" style="width:100%">
+        <!-- 新增、导入、导出 -->
+        <el-row>
+          <el-button @click="handleAdd" icon="i-ep-circle-plus-filled" type="primary">添加</el-button>
+        </el-row>
+        <!-- 表格 -->
+        <el-table :data="tableData" style="width: 100%" stripe border table-layout="auto" :highlight-current-row="true"
+                  :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
+          <el-table-column type="index" label="#" />
+          <el-table-column label="角色名称">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.roleName }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="角色编码">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.roleCode }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="状态">
+            <template #default="scope">
+              <el-tooltip :content="scope.row.status ? '启用' : '停用'" placement="top">
+                <el-switch v-model="scope.row.status" class="ml-2" inline-prompt :active-value="1" :inactive-value="0"
+                           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+                </el-switch>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+          <el-table-column label="排序">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.sort }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="创建时间">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.created }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="更新时间">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.updated }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" :fixed="'right'" width="150">
+            <template #default="scope">
+              <el-tooltip class="box-item" effect="dark" content="详情" placement="top">
+                <el-button link icon="i-ep-info-filled" @click="handleView(scope.$index, scope.row)">
                 </el-button>
-              </template>
-            </el-popconfirm>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- 分页组件 -->
-      <el-pagination :currentPage="searchOptions.pageNo" :pageSize="searchOptions.pageSize" background small
-                     layout="->,total,size,prev,pager,next,jumper" :total="total" :page-sizes="[5, 10, 15, 20]"
-                     class="mt-4"
-                     @sizeChange="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
-    </el-card>
-  </el-row>
+              </el-tooltip>
+              <el-tooltip class="box-item" effect="dark" content="编辑" placement="top">
+                <el-button link icon="i-ep-edit" @click="handleEdit(scope.$index, scope.row)">
+                </el-button>
+              </el-tooltip>
+              <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
+                <el-button type="success" link icon="i-ep-position" @click="handleAllocResource(scope.$index, scope.row)">
+                </el-button>
+              </el-tooltip>
+              <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+                             width="160">
+                <template #reference>
+                  <el-button type="danger" icon="i-ep-delete" link>
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 分页组件 -->
+        <el-pagination :currentPage="searchOptions.pageNo" :pageSize="searchOptions.pageSize" background small
+                       layout="->,total,size,prev,pager,next,jumper" :total="total" :page-sizes="[5, 10, 15, 20]"
+                       class="mt-4"
+                       @sizeChange="handleSizeChange" @current-change="handleCurrentChange"></el-pagination>
+      </el-card>
+    </el-row>
+  </div>
 </template>
 
 <script setup lang="tsx">

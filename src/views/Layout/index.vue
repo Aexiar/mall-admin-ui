@@ -30,7 +30,6 @@ import TabsView from '@/components/TabsView/index.vue'
 <style scoped lang="scss">
 .layout-container {
   height: 100%;
-  transition: all 1s;
 
   .aside {
     overflow: hidden;
