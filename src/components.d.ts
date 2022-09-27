@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Badge: typeof import('./components/Badge/index.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb/index.vue')['default']
     ChangePassword: typeof import('./components/ChangePassword/index.vue')['default']
+    Dept: typeof import('./components/System/Dept/Add/index.vue')['default']
     Edit: typeof import('./components/System/Admin/Edit/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']

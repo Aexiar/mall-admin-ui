@@ -117,7 +117,7 @@ import {AdminPageReturnType} from "@/types/ums/admin"
 import {roleDeleteApi} from "@/api/ums/role"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import RoleView from '@/components/System/Role/View/index.vue'
-import RoleAdd from '@/components/System/Role/Add/index.vue'
+import DeptAdd from '@/components/System/Dept/Add/index.vue'
 import RoleEdit from '@/components/System/Role/Edit/index.vue'
 import {ElMessage} from "element-plus"
 import go from 'await-handler-ts'
@@ -226,10 +226,10 @@ const handleDelete = async (index: number, row: AdminPageReturnType) => {
 // 新增
 const handleAdd = () => {
   dialogService({
-    title: '添加角色',
+    title: '添加部门',
     height: '50vh',
     width: '40vw',
-    content: <RoleAdd />,
+    content: <DeptAdd />,
     buttons: [
       {
         label: '确定 ',
