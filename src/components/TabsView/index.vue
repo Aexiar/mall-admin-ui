@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-container">
+  <div>
     <el-tabs
         v-model="activeTab"
         type="card"
@@ -8,7 +8,6 @@
         @tab-change="changeTab"
         @tab-click="clickTab"
     >
-      <!-- class is-active -->
       <el-tab-pane
           :closable="item.path != '/' && item.path != '/home'"
           v-for="item in tabs"
@@ -88,8 +87,11 @@ const removeTab = (pane: TabPanelName) => {
   color: #fff;
 }
 
-::v-deep(.is-icon-close) {
-
+.example-showcase .el-dropdown-link {
+  cursor: pointer;
+  color: var(--el-color-primary);
+  display: flex;
+  align-items: center;
 }
 
 </style>
