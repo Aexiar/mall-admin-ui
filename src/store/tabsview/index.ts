@@ -4,7 +4,9 @@ import {StateType, ActionType, TabType} from '@/types/tabsview'
 export const useTabsViewStore = defineStore<string, StateType, _GettersTree<StateType>, ActionType>('tabs-view', {
         state: () => {
             return {
-                tabs: []
+                tabs: [
+                    {title: '首页', path: '/home'}
+                ]
             }
         },
         actions: {

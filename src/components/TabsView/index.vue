@@ -12,7 +12,6 @@
           :closable="item.path != '/' && item.path != '/home'"
           v-for="item in tabs"
           :key="item.path"
-          :class="[activeTab === item.path? 'is-active':'']"
           :label="item.title"
           :name="item.path">
       </el-tab-pane>
