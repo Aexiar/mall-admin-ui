@@ -1,6 +1,8 @@
 import {_GettersTree, defineStore} from "pinia";
 import {ActionType, AdminLoginType, AminLoginReturnType, ProfileReturnType, StateType,} from "@/types/ums/admin";
 import {adminLoginApi, adminLogoutApi, profileApi} from "@/api/ums/admin";
+import {useTabsViewStore} from "@/store/tabsview";
+
 
 export const useAdminStore = defineStore<string,
     StateType,
@@ -38,8 +40,12 @@ export const useAdminStore = defineStore<string,
         // 退出登录
         async logoutAction(): Promise<void> {
             await adminLogoutApi()
-            // 清空本地缓存
-            localStorage.clear()
+            // 清空登录相关缓存
+            this.$reset()
+            // 清空 tabs
+            const tabsViewStore = useTabsViewStore()
+            tabsViewStore.$reset()
+
         },
         // 清除用户缓存数据
         clearAction(): void {

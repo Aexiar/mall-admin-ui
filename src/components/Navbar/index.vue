@@ -125,9 +125,13 @@ const handleCommand = async (command: string) => {
     }))
     if (!error && result) {
       // 触发退出登录操作
-      await adminStore.logoutAction()
-      // 跳转到登录页面
-      await router.push('/login')
+      try {
+        await adminStore.logoutAction()
+        // 跳转到登录页面
+        await router.push('/login')
+      }catch (e){
+        console.error(e)
+      }
     }
   }
 }
