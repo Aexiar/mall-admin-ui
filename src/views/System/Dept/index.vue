@@ -98,7 +98,7 @@
               </el-tooltip>
               <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`"
                              @confirm="handleDelete(scope.$index, scope.row)"
-                             width="160">
+                             width="160" :disabled="scope.row.isRoot">
                 <template #reference>
                   <el-button type="danger" icon="i-ep-delete" link>
                   </el-button>
