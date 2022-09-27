@@ -38,7 +38,8 @@ export const useAdminStore = defineStore<string,
         // 退出登录
         async logoutAction(): Promise<void> {
             await adminLogoutApi()
-            this.clearAction()
+            // 清空本地缓存
+            localStorage.clear()
         },
         // 清除用户缓存数据
         clearAction(): void {

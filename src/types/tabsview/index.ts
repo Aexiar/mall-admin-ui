@@ -11,6 +11,6 @@ export type StateType = {
 
 // Store 中的 Action 的类型
 export interface ActionType {
-    addTab: () => void,
-    removeTab: () => void
+    addTab: (data: TabType) => void,
+    removeTab: (path: string) => void
 }

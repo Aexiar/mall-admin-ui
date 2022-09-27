@@ -11,8 +11,9 @@
       <!-- class is-active -->
       <el-tab-pane
           :closable="item.path != '/' && item.path != '/home'"
-          v-for="item in tabList"
+          v-for="item in tabs"
           :key="item.path"
+          :class="[activeTab === item.path? 'is-active':'']"
           :label="item.title"
           :name="item.path">
       </el-tab-pane>
@@ -20,27 +21,24 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {Ref, ref, watch} from 'vue'
+import {ref, watch} from 'vue'
 import {
   useRoute,
   RouteLocationMatched, useRouter
 } from "vue-router";
 import {TabType} from "@/types/tabsview";
+import {useTabsViewStore} from '@/store/tabsview/index'
 import {TabsPaneContext} from "element-plus";
+import {storeToRefs} from "pinia";
 
 const route = useRoute()
 const router = useRouter()
 
-const activeTab = ref(route.path)
-const tabList: Ref<TabType[]> = ref<TabType[]>([])
+const tabsViewStore = useTabsViewStore()
 
-// 添加 tag
-const addTab = (data: TabType) => {
-  const tag = tabList.value.find(item => item.path == data.path);
-  if (!tag) {
-    tabList.value.push(data)
-  }
-}
+const activeTab = ref(route.path)
+
+const {tabs} = storeToRefs(tabsViewStore);
 
 // tab 改变
 const changeTab = (path: string) => {
@@ -53,7 +51,6 @@ const clickTab = (pane: TabsPaneContext, ev: Event) => {
   if (result) {
     router.push(result as string)
   }
-
 }
 
 // 监视 route 中的 matched 的变化
@@ -61,7 +58,7 @@ watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
   const result: RouteLocationMatched[] = newValue.filter(item => item.path !== '' && item.meta.title)
   if (result) {
     result.forEach(item => {
-      addTab({
+      tabsViewStore.addTab({
         title: item.meta.title,
         path: item.path
       })
@@ -71,10 +68,7 @@ watch(() => route.matched, (newValue: RouteLocationMatched[]) => {
 
 // 删除 tab
 const removeTab = (path: string) => {
-  const index = tabList.value.findIndex(item => item.path == path);
-  if (-1 !== index) {
-    tabList.value.splice(index, 1)
-  }
+  tabsViewStore.removeTab(path)
 }
 </script>
 <style scoped lang="scss">
