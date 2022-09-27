@@ -32,23 +32,18 @@
           <el-button @click="handleAdd" icon="i-ep-circle-plus-filled" type="primary">添加</el-button>
         </el-row>
         <!-- 表格 -->
-        <el-table :data="tableData" style="width: 100%" stripe border table-layout="auto" :highlight-current-row="true"
-                  :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}">
+        <el-table :data="tableData"
+                  style="width: 100%; margin-bottom: 20px"
+                  stripe
+                  row-key="id"
+                  border
+                  table-layout="auto"
+                  :highlight-current-row="true"
+                  default-expand-all
+                  :header-cell-style="{background:'#e3e3e7',color:'#515a6d'}"
+                  :tree-props="{ children: 'children' }">
           <el-table-column type="index" label="#" />
-          <el-table-column label="角色名称">
-            <template #default="scope">
-              <div style="display: flex; align-items: center">
-                <span style="margin-left: 10px">{{ scope.row.roleName }}</span>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="角色编码">
-            <template #default="scope">
-              <div style="display: flex; align-items: center">
-                <span style="margin-left: 10px">{{ scope.row.roleCode }}</span>
-              </div>
-            </template>
-          </el-table-column>
+          <el-table-column label="部门名称" prop="deptName"></el-table-column>
           <el-table-column label="状态">
             <template #default="scope">
               <el-tooltip :content="scope.row.status ? '启用' : '停用'" placement="top">
@@ -56,6 +51,13 @@
                            style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
                 </el-switch>
               </el-tooltip>
+            </template>
+          </el-table-column>
+          <el-table-column label="部门负责人">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px">{{ scope.row.principal }}</span>
+              </div>
             </template>
           </el-table-column>
           <el-table-column label="排序">
@@ -90,10 +92,12 @@
                 </el-button>
               </el-tooltip>
               <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
-                <el-button type="success" link icon="i-ep-position" @click="handleAllocResource(scope.$index, scope.row)">
+                <el-button type="success" link icon="i-ep-position"
+                           @click="handleAllocResource(scope.$index, scope.row)">
                 </el-button>
               </el-tooltip>
-              <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+              <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`"
+                             @confirm="handleDelete(scope.$index, scope.row)"
                              width="160">
                 <template #reference>
                   <el-button type="danger" icon="i-ep-delete" link>
@@ -119,9 +123,8 @@ import {ElMessage} from "element-plus"
 import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
-import {RolePageReturnType} from "@/types/ums/role";
-import {rolePageListApi} from "@/api/ums/role";
-import {DeptListType} from "@/types/ums/dept";
+import {DeptListType, DeptReturnType} from "@/types/ums/dept";
+import {listTreeApi} from "@/api/ums/dept";
 
 // 搜索条件
 const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<DeptListType>>({
@@ -129,35 +132,33 @@ const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<
   status: -1,
 })
 
-// 总条数
-const total = ref<number>(0)
 
-// 分页查询数据
-const tableData = ref<RolePageReturnType[]>([])
+// 部门树查询数据
+const tableData = ref<DeptReturnType[]>([])
 
-// 分页查询
-const paginationQuery = async () => {
-  const result: Result<PaginationReturn<RolePageReturnType>> = await rolePageListApi(searchOptions)
-  total.value = result.data.total
-  tableData.value = result.data.records
+// 部门树
+const treeQuery = async () => {
+  const result: Result<DeptReturnType[]> = await listTreeApi(searchOptions)
+  tableData.value = result.data
+  console.log('@@@', tableData.value)
 }
 
 onMounted(async () => {
-  await paginationQuery()
+  await treeQuery()
 })
 
 // 查询
 const handleSearch = async () => {
-  await paginationQuery()
+  await treeQuery()
 }
 
 // 重置
 const handleReset = async () => {
   // 查询条件重置
-  searchOptions.name = ''
+  searchOptions.deptName = ''
   searchOptions.status = -1
-  // 分页查询
-  await paginationQuery()
+  // 查询
+  await treeQuery()
 }
 
 // 编辑
@@ -178,8 +179,8 @@ const handleEdit = (index: number, row: AdminPageReturnType) => {
               message: result.msg,
               type: 'success',
             })
-            // 分页查询
-            await paginationQuery()
+            // 查询
+            await treeQuery()
             vm.hide()
           }
         },
@@ -215,8 +216,8 @@ const handleDelete = async (index: number, row: AdminPageReturnType) => {
       message: result.msg,
       type: 'success',
     })
-    // 分页查询
-    await paginationQuery()
+    // 查询
+    await treeQuery()
   } catch (e) {
     console.error(e)
   }
@@ -240,8 +241,8 @@ const handleAdd = () => {
               message: result.msg,
               type: 'success',
             })
-            // 分页查询
-            await paginationQuery()
+            // 查询
+            await treeQuery()
             vm.hide()
           }
         }

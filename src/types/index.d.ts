@@ -44,3 +44,11 @@ type MenuType = {
     // 子菜单
     children?: MenuType[]
 }
+
+// 树数据类型
+// type TreeType<T = any> = {
+//     id: string,
+//     parentId: string,
+//     data: T
+//     children: TreeType[]
+// }
