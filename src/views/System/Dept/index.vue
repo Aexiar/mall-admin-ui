@@ -123,7 +123,7 @@ import {ElMessage} from "element-plus"
 import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
-import {DeptListType, DeptReturnType} from "@/types/ums/dept";
+import {DeptListType, DeptTreeReturnType} from "@/types/ums/dept";
 import {listTreeApi} from "@/api/ums/dept";
 
 // 搜索条件
@@ -134,11 +134,11 @@ const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<
 
 
 // 部门树查询数据
-const tableData = ref<DeptReturnType[]>([])
+const tableData = ref<DeptTreeReturnType[]>([])
 
 // 部门树
 const treeQuery = async () => {
-  const result: Result<DeptReturnType[]> = await listTreeApi(searchOptions)
+  const result: Result<DeptTreeReturnType[]> = await listTreeApi(searchOptions)
   tableData.value = result.data
   console.log('@@@', tableData.value)
 }

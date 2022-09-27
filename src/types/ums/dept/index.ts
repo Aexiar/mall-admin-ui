@@ -7,7 +7,7 @@ export type DeptListType = {
 }
 
 // 列表接口的返回值数据类型
-export type DeptReturnType = {
+export type DeptTreeReturnType = {
     // 主键
     id: string,
     // 父级id
@@ -27,6 +27,6 @@ export type DeptReturnType = {
     // 创建时间
     created: string,
     // 子节点
-    children?: DeptReturnType[]
+    children?: DeptTreeReturnType[]
 }
 
