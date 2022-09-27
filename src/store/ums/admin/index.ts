@@ -48,6 +48,9 @@ export const useAdminStore = defineStore<string,
         },
         // 清除用户缓存数据
         clearAction(): void {
+            // 清空 tabs
+            const tabsViewStore = useTabsViewStore()
+            tabsViewStore.$reset()
             // 清空数据
             this.$reset()
         },
