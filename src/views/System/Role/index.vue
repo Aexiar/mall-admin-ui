@@ -93,10 +93,12 @@
                 </el-button>
               </el-tooltip>
               <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
-                <el-button type="success" link icon="i-ep-position" @click="handleAllocResource(scope.$index, scope.row)">
+                <el-button type="success" link icon="i-ep-position"
+                           @click="handleAllocResource(scope.$index, scope.row)">
                 </el-button>
               </el-tooltip>
-              <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`" @confirm="handleDelete(scope.$index, scope.row)"
+              <el-popconfirm :title="`确定删除${scope.row.roleName}吗？`"
+                             @confirm="handleDelete(scope.$index, scope.row)"
                              width="160">
                 <template #reference>
                   <el-button type="danger" icon="i-ep-delete" link>
@@ -234,16 +236,14 @@ const handleView = (index: number, row: AdminPageReturnType) => {
 
 // 删除
 const handleDelete = async (index: number, row: AdminPageReturnType) => {
-  try {
-    const result: Result = await roleDeleteApi(row.id)
+  let [error, result] = await go<any, Result>(roleDeleteApi(row.id))
+  if (!error && result) {
     ElMessage({
       message: result.msg,
       type: 'success',
     })
     // 分页查询
     await paginationQuery()
-  } catch (e) {
-    console.error(e)
   }
 }
 
