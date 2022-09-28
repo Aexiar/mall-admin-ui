@@ -40,3 +40,17 @@ export type AddType = {
     sort: number
 }
 
+
+// 查询接口的返回值类型
+export type ViewReturnType = {
+    // 主键
+    id: string,
+    // 父级id
+    parentId: string,
+    // 部门名称
+    deptName: string,
+    // 状态
+    status: number,
+    // 排序字段
+    sort: number
+}

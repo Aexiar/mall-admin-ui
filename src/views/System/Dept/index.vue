@@ -47,8 +47,13 @@
           <el-table-column label="状态">
             <template #default="scope">
               <el-tooltip :content="scope.row.status ? '启用' : '停用'" placement="top">
-                <el-switch v-model="scope.row.status" class="ml-2" inline-prompt :active-value="1" :inactive-value="0"
-                           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949">
+                <el-switch v-model="scope.row.status"
+                           class="ml-2" inline-prompt
+                           :active-value="1"
+                           :inactive-value="0"
+                           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+                           :disabled="scope.row.isRoot"
+                >
                 </el-switch>
               </el-tooltip>
             </template>
@@ -109,7 +114,7 @@
 import {AdminPageReturnType} from "@/types/ums/admin"
 import {roleDeleteApi} from "@/api/ums/role"
 import dialogService from '@caroundsky/el-plus-dialog-service'
-import RoleView from '@/components/System/Role/View/index.vue'
+import DeptView from '@/components/System/Dept/View/index.vue'
 import DeptAdd from '@/components/System/Dept/Add/index.vue'
 import RoleEdit from '@/components/System/Role/Edit/index.vue'
 import {ElMessage} from "element-plus"
@@ -183,10 +188,10 @@ const handleEdit = (index: number, row: AdminPageReturnType) => {
 // 详情
 const handleView = (index: number, row: AdminPageReturnType) => {
   dialogService({
-    title: '角色详情',
+    title: '部门详情',
     height: '50vh',
     width: '40vw',
-    content: <RoleView id={row.id} />,
+    content: <DeptView id={row.id} />,
     buttons: [
       {
         label: '确定 ',

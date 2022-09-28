@@ -38,8 +38,6 @@
 
 <script lang="ts" setup>
 import {ElForm, FormInstance, FormRules} from 'element-plus'
-import {adminAddApi} from "@/api/ums/admin";
-import go from 'await-handler-ts'
 import {onMounted, reactive, ref, unref} from "vue";
 import {AddType} from "@/types/ums/dept";
 import {DeptTreeReturnType} from "@/types/ums/dept";
