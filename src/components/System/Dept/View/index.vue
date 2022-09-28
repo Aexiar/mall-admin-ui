@@ -35,7 +35,8 @@
 <script setup lang="ts">
 import {DeptTreeReturnType, ViewReturnType} from "@/types/ums/dept"
 import {onMounted, ref, watchEffect} from "vue";
-import {deptListTreeApi, deptViewApi} from "@/api/ums/dept";
+import {deptListApi, deptViewApi} from "@/api/ums/dept";
+import {construct} from "@aximario/json-tree";
 
 let data = ref<Partial<ViewReturnType>>({
   parentId: '',
@@ -53,8 +54,12 @@ interface Props {
 const superiorDeptData = ref<DeptTreeReturnType[]>([])
 
 onMounted(async () => {
-  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi({})
-  superiorDeptData.value = result.data
+  const result: Result<DeptTreeReturnType[]> = await deptListApi({})
+  superiorDeptData.value = construct(result.data, {
+    id: 'id',
+    pid: 'parentId',
+    children: 'children',
+  })
 })
 
 const defaultProps = {

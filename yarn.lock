@@ -23,6 +23,11 @@
   resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.5.2.tgz#8c2d931ff927be0ebe740169874a3d4004ab414b"
   integrity sha512-CQkeV+oJxUazwjlHD0/3ZD08QWKuGQkhnrKo3e6ly5pd48VUpXbb77q0xMU4+vc2CkJnDS02Eq/M9ugyX20XZA==
 
+"@aximario/json-tree@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@aximario/json-tree/-/json-tree-2.2.4.tgz#24b94ca6db5741b69b14948097ccdf307922e1ff"
+  integrity sha512-XGMJ+zuVQ0CRizo1d3ZTUKEvrTqKYbm2a00T6DnRFR36mzV6mexLUKRIk6repj3JKgLrj3iwW8aUFrOS4P7CEA==
+
 "@babel/code-frame@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
@@ -879,6 +884,11 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+array2tree@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/array2tree/-/array2tree-1.1.3.tgz#97aa49aa3f1235716434c82a89afddd50bcc6e69"
+  integrity sha512-EqZJOsrNryO92UZkRdh8aaC1HhWILWxrao/4GWBgRvNUKFOOq/08edHNWVJStIe1ixIT5FFUeD8xVabvMb1ZRg==
 
 async-validator@^4.2.5:
   version "4.2.5"

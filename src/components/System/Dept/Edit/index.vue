@@ -38,11 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import {deptEditApi, deptListTreeApi, deptViewApi} from "@/api/ums/dept"
+import {deptEditApi, deptListApi, deptViewApi} from "@/api/ums/dept"
 import {DeptTreeReturnType, EditType, ViewReturnType} from "@/types/ums/dept"
 import {FormInstance, FormRules} from "element-plus"
 import {onMounted, reactive, ref, unref, watchEffect} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
+import {construct} from "@aximario/json-tree";
 
 const editFormRef = ref<FormInstance>()
 
@@ -59,8 +60,12 @@ const editForm: UnwrapNestedRefs<ViewReturnType | EditType> = reactive<ViewRetur
 const superiorDeptData = ref<DeptTreeReturnType[]>([])
 
 onMounted(async () => {
-  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi({})
-  superiorDeptData.value = result.data
+  const result: Result<DeptTreeReturnType[]> = await deptListApi({})
+  superiorDeptData.value = construct(result.data, {
+    id: 'id',
+    pid: 'parentId',
+    children: 'children',
+  })
 })
 
 const defaultProps = {

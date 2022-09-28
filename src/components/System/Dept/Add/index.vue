@@ -41,7 +41,8 @@ import {ElForm, FormInstance, FormRules} from 'element-plus'
 import {onMounted, reactive, ref, unref} from "vue";
 import {AddType} from "@/types/ums/dept";
 import {DeptTreeReturnType} from "@/types/ums/dept";
-import {deptAddApi, deptListTreeApi} from "@/api/ums/dept";
+import {deptAddApi, deptListApi} from "@/api/ums/dept";
+import {construct} from "@aximario/json-tree";
 
 const addFormRef = ref<FormInstance>()
 const addForm = reactive<Partial<AddType>>({
@@ -55,8 +56,12 @@ const addForm = reactive<Partial<AddType>>({
 const superiorDeptData = ref<DeptTreeReturnType[]>([])
 
 onMounted(async () => {
-  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi({})
-  superiorDeptData.value = result.data
+  const result: Result<DeptTreeReturnType[]> = await deptListApi({})
+  superiorDeptData.value = construct(result.data, {
+    id: 'id',
+    pid: 'parentId',
+    children: 'children',
+  })
 })
 
 const defaultProps = {

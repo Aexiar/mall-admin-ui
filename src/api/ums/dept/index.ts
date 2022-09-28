@@ -3,8 +3,8 @@ import {AddType, DeptListType, DeptTreeReturnType, EditType} from "@/types/ums/d
 import {ViewReturnType} from "@/types/ums/dept";
 
 /* 部门树 */
-export const deptListTreeApi: (data: Partial<DeptListType>) => PromiseResult<DeptTreeReturnType[]> = data => {
-    return request.post(`/ums/dept/listTree`, {...data})
+export const deptListApi: (data: Partial<DeptListType>) => PromiseResult<DeptTreeReturnType[]> = data => {
+    return request.post(`/ums/dept/list`, {...data})
 }
 
 /* 增加部门 */

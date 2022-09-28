@@ -22,8 +22,6 @@ export type DeptTreeReturnType = {
     isRoot: boolean,
     // 创建时间
     created: string,
-    // 子节点
-    children?: DeptTreeReturnType[]
 }
 
 // 新增接口的数据类型

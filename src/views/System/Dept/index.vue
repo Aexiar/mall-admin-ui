@@ -5,7 +5,7 @@
       <el-card shadow="hover" style="width: 100%">
         <el-form :model="searchOptions" :inline="true">
           <el-form-item label="部门名称">
-            <el-input v-model="searchOptions.roleName" />
+            <el-input v-model="searchOptions.deptName" />
           </el-form-item>
           <el-form-item label="状态">
             <el-select v-model="searchOptions.status">
@@ -112,7 +112,6 @@
 
 <script setup lang="tsx">
 import {AdminPageReturnType} from "@/types/ums/admin"
-import {roleDeleteApi} from "@/api/ums/role"
 import dialogService from '@caroundsky/el-plus-dialog-service'
 import DeptView from '@/components/System/Dept/View/index.vue'
 import DeptAdd from '@/components/System/Dept/Add/index.vue'
@@ -122,7 +121,8 @@ import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
 import {DeptListType, DeptTreeReturnType} from "@/types/ums/dept";
-import {deptDeleteApi, deptListTreeApi} from "@/api/ums/dept";
+import {deptDeleteApi, deptListApi} from "@/api/ums/dept";
+import { construct } from '@aximario/json-tree'
 
 // 搜索条件
 const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<DeptListType>>({
@@ -130,13 +130,18 @@ const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<
   status: -1,
 })
 
+
 // 部门树查询数据
 const tableData = ref<DeptTreeReturnType[]>([])
 
 // 部门树
 const treeQuery = async () => {
-  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi(searchOptions)
-  tableData.value = result.data
+  const result: Result<DeptTreeReturnType[]> = await deptListApi(searchOptions)
+  tableData.value = construct(result.data, {
+    id: 'id',
+    pid: 'parentId',
+    children: 'children',
+  })
 }
 
 onMounted(async () => {
