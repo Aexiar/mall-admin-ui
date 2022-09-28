@@ -51,6 +51,8 @@ export type ViewReturnType = {
     deptName: string,
     // 状态
     status: number,
+    // 是否根节点
+    isRoot: boolean,
     // 排序字段
     sort: number
 }

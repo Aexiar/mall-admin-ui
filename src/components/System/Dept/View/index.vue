@@ -1,15 +1,17 @@
 <template>
   <el-form label-width="100px" class="m-5">
-    <!--<el-form-item label="上级部门" prop="parentId">-->
-    <!--  <el-tree-select v-model="addForm.parentId" :data="superiorDeptData"-->
-    <!--                  :render-after-expand="false"-->
-    <!--                  check-strictly show-checkbox-->
-    <!--                  node-key="id"-->
-    <!--                  :props="defaultProps"-->
-    <!--                  filterable-->
-    <!--                  :filter-node-method="filterNodeMethod"-->
-    <!--  />-->
-    <!--</el-form-item>-->
+    <el-form-item label="上级部门" prop="parentId">
+      <el-tree-select v-model="data.parentId" :data="superiorDeptData"
+                      :render-after-expand="false"
+                      check-strictly show-checkbox
+                      node-key="id"
+                      :props="defaultProps"
+                      filterable
+                      :filter-node-method="filterNodeMethod"
+                      v-show="!data.isRoot"
+                      :disabled="true"
+      />
+    </el-form-item>
     <el-form-item label="部门名称">
       <el-input v-model="data.deptName" clearable disabled/>
     </el-form-item>
@@ -32,19 +34,38 @@
 </template>
 
 <script setup lang="ts">
-import {ViewReturnType} from "@/types/ums/dept"
-import {ref, watchEffect} from "vue";
-import {deptViewApi} from "@/api/ums/dept";
+import {DeptTreeReturnType, ViewReturnType} from "@/types/ums/dept"
+import {onMounted, ref, watchEffect} from "vue";
+import {deptListTreeApi, deptViewApi} from "@/api/ums/dept";
 
 let data = ref<Partial<ViewReturnType>>({
   parentId: '',
   deptName: '',
   status: 1,
-  sort: 0
+  sort: 0,
+  isRoot: false
 })
 
 interface Props {
   id: string
+}
+
+// 上级部门
+const superiorDeptData = ref<DeptTreeReturnType[]>([])
+
+onMounted(async () => {
+  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi({})
+  superiorDeptData.value = result.data
+})
+
+const defaultProps = {
+  children: 'children',
+  label: 'deptName',
+}
+
+// 判断 data 中是否包含指定的关键字
+const filterNodeMethod = (value: string, data: DeptTreeReturnType) => {
+  return data.deptName.includes(value)
 }
 
 const props = withDefaults(defineProps<Props>(), {})
