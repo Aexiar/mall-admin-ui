@@ -122,7 +122,7 @@ import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
 import {DeptListType, DeptTreeReturnType} from "@/types/ums/dept";
-import {deptListTreeApi} from "@/api/ums/dept";
+import {deptDeleteApi, deptListTreeApi} from "@/api/ums/dept";
 
 // 搜索条件
 const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<DeptListType>>({
@@ -158,7 +158,7 @@ const handleReset = async () => {
 }
 
 // 编辑
-const handleEdit = (index: number, row: AdminPageReturnType) => {
+const handleEdit = (index: number, row: DeptTreeReturnType) => {
   dialogService({
     title: '部门编辑',
     height: '50vh',
@@ -186,7 +186,7 @@ const handleEdit = (index: number, row: AdminPageReturnType) => {
 }
 
 // 详情
-const handleView = (index: number, row: AdminPageReturnType) => {
+const handleView = (index: number, row: DeptTreeReturnType) => {
   dialogService({
     title: '部门详情',
     height: '50vh',
@@ -205,9 +205,9 @@ const handleView = (index: number, row: AdminPageReturnType) => {
 }
 
 // 删除
-const handleDelete = async (index: number, row: AdminPageReturnType) => {
+const handleDelete = async (index: number, row: DeptTreeReturnType) => {
   try {
-    const result: Result = await roleDeleteApi(row.id)
+    const result: Result = await deptDeleteApi(row.id)
     ElMessage({
       message: result.msg,
       type: 'success',

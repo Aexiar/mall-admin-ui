@@ -22,3 +22,8 @@ export const deptEditApi: (data: EditType) =>PromiseResult<ViewReturnType>  = (d
     return request.put(`/ums/dept/edit/`,data);
 }
 
+/* 部门删除 */
+export const deptDeleteApi: (id: string) => PromiseResult<null> = (id: string) => {
+    return request.delete(`/ums/dept/delete/${id}`)
+}
+
