@@ -14,10 +14,6 @@ export type DeptTreeReturnType = {
     parentId: string,
     // 部门名称
     deptName: string,
-    // 负责人id
-    principalId: string,
-    // 负责人
-    principal: string
     // 状态
     status: number,
     // 排序
@@ -28,5 +24,19 @@ export type DeptTreeReturnType = {
     created: string,
     // 子节点
     children?: DeptTreeReturnType[]
+}
+
+// 新增接口的数据类型
+export type AddType = {
+    // 主键
+    id: string,
+    // 父级id
+    parentId: string,
+    // 部门名称
+    deptName: string,
+    // 状态
+    status: number,
+    // 排序字段
+    sort: number
 }
 

@@ -53,13 +53,6 @@
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column label="部门负责人">
-            <template #default="scope">
-              <div style="display: flex; align-items: center">
-                <span style="margin-left: 10px">{{ scope.row.principal }}</span>
-              </div>
-            </template>
-          </el-table-column>
           <el-table-column label="排序">
             <template #default="scope">
               <div style="display: flex; align-items: center">
@@ -124,7 +117,7 @@ import go from 'await-handler-ts'
 import {onMounted, reactive, ref} from "vue";
 import {UnwrapNestedRefs} from "@vue/reactivity";
 import {DeptListType, DeptTreeReturnType} from "@/types/ums/dept";
-import {listTreeApi} from "@/api/ums/dept";
+import {deptListTreeApi} from "@/api/ums/dept";
 
 // 搜索条件
 const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<DeptListType>>({
@@ -132,15 +125,13 @@ const searchOptions: UnwrapNestedRefs<Partial<DeptListType>> = reactive<Partial<
   status: -1,
 })
 
-
 // 部门树查询数据
 const tableData = ref<DeptTreeReturnType[]>([])
 
 // 部门树
 const treeQuery = async () => {
-  const result: Result<DeptTreeReturnType[]> = await listTreeApi(searchOptions)
+  const result: Result<DeptTreeReturnType[]> = await deptListTreeApi(searchOptions)
   tableData.value = result.data
-  console.log('@@@', tableData.value)
 }
 
 onMounted(async () => {
