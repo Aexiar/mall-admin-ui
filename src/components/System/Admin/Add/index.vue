@@ -64,8 +64,7 @@
 
 <script lang="ts" setup>
 import {ElForm, FormInstance, FormRules, UploadProps} from 'element-plus'
-import {adminAddApi, adminEditApi} from "@/api/ums/admin";
-import go from 'await-handler-ts'
+import {adminAddApi} from "@/api/ums/admin";
 import {ElMessage} from "element-plus"
 import {reactive, ref, unref} from "vue";
 import {ReturnCodeEnum} from "@/types/enums";

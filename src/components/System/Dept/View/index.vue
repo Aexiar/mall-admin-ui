@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="100px" class="m-5">
-    <el-form-item label="上级部门" prop="parentId">
+    <el-form-item label="上级部门" prop="parentId" v-show="!data.isRoot">
       <el-tree-select v-model="data.parentId" :data="superiorDeptData"
                       :render-after-expand="false"
                       check-strictly show-checkbox
@@ -8,7 +8,6 @@
                       :props="defaultProps"
                       filterable
                       :filter-node-method="filterNodeMethod"
-                      v-show="!data.isRoot"
                       :disabled="true"
       />
     </el-form-item>

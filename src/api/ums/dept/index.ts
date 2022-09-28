@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import {AddType, DeptListType, DeptTreeReturnType} from "@/types/ums/dept";
+import {AddType, DeptListType, DeptTreeReturnType, EditType} from "@/types/ums/dept";
 import {ViewReturnType} from "@/types/ums/dept";
 
 /* 部门树 */
@@ -15,5 +15,10 @@ export const deptAddApi: (data: Partial<AddType>) => PromiseResult<null> = (data
 /* 部门详情 */
 export const deptViewApi: (id: string) => PromiseResult<ViewReturnType> = id => {
     return request.get(`/ums/dept/view/${id}`)
+}
+
+/* 部门编辑 */
+export const deptEditApi: (data: EditType) =>PromiseResult<ViewReturnType>  = (data) => {
+    return request.put(`/ums/dept/edit/`,data);
 }
 

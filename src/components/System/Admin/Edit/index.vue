@@ -60,10 +60,9 @@
 </template>
 
 <script setup lang="ts">
-import {adminAddApi, adminEditApi, adminViewApi} from "@/api/ums/admin"
+import {adminEditApi, adminViewApi} from "@/api/ums/admin"
 import {EditType, ViewReturnType} from "@/types/ums/admin"
 import {ElMessage, FormInstance, FormRules, UploadProps} from "element-plus"
-import go from 'await-handler-ts'
 import {reactive, ref, unref, watchEffect} from "vue";
 import {ReturnCodeEnum} from "@/types/enums";
 import {UnwrapNestedRefs} from "@vue/reactivity";
