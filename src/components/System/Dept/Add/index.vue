@@ -57,11 +57,13 @@ const superiorDeptData = ref<DeptTreeReturnType[]>([])
 
 onMounted(async () => {
   const result: Result<DeptTreeReturnType[]> = await deptListApi({})
-  superiorDeptData.value = construct(result.data, {
+  superiorDeptData.value = [{deptName: '顶级部门', id: '0'}, ...construct(result.data, {
     id: 'id',
     pid: 'parentId',
     children: 'children',
-  })
+  })]
+
+  console.log('上级部门', superiorDeptData.value)
 })
 
 const defaultProps = {
@@ -96,6 +98,7 @@ const addFormRules = reactive<FormRules>({
 const submitForm = async () => {
   // 进行表单验证，如果表单验证失败，那么 error 就是错误对象信息；如果表单验证成功，那么 error 就是 null
   const validate = await unref(addFormRef)?.validate();
+  console.log('@@', addForm)
   if (validate) {
     return await deptAddApi(addForm)
   }
