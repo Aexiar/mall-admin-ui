@@ -55,11 +55,11 @@ const superiorDeptData = ref<DeptTreeReturnType[]>([])
 
 onMounted(async () => {
   const result: Result<DeptTreeReturnType[]> = await deptListApi({})
-  superiorDeptData.value = construct(result.data, {
+  superiorDeptData.value = [{deptName: '顶级部门', id: '0'},...construct(result.data, {
     id: 'id',
     pid: 'parentId',
     children: 'children',
-  })
+  })]
 })
 
 const defaultProps = {

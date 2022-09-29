@@ -89,11 +89,6 @@
                 <el-button link icon="i-ep-edit" @click="handleEdit(scope.$index, scope.row)">
                 </el-button>
               </el-tooltip>
-              <el-tooltip class="box-item" effect="dark" content="分配权限" placement="top">
-                <el-button type="success" link icon="i-ep-position"
-                           @click="handleAllocResource(scope.$index, scope.row)">
-                </el-button>
-              </el-tooltip>
               <el-popconfirm :title="`确定删除${scope.row.deptName}吗？`"
                              @confirm="handleDelete(scope.$index, scope.row)"
                              width="160" :disabled="scope.row.isRoot">
